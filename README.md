@@ -1,97 +1,186 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# CarAI - AI-Powered Car Assistant
 
-# Getting Started
+A React Native application with Firebase authentication for car diagnostics and management.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Features
 
-## Step 1: Start Metro
+- 🔐 **Firebase Authentication**
+  - Email/Password Sign Up
+  - Email/Password Sign In
+  - Password Reset
+  - Secure User Sessions
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- 🎨 **Modern UI/UX**
+  - Beautiful and responsive design
+  - Smooth navigation transitions
+  - Loading states and error handling
+  - Form validation
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- 🚗 **CarAI Features** (Coming Soon)
+  - Car Diagnostics
+  - Maintenance Reminders
+  - Fuel Efficiency Tracking
+  - Driving Analytics
 
-```sh
-# Using npm
-npm start
+## Prerequisites
 
-# OR using Yarn
-yarn start
-```
+- Node.js (>= 18)
+- React Native CLI
+- Firebase project setup
+- iOS Simulator (for iOS development)
+- Android Studio (for Android development)
 
-## Step 2: Build and run your app
+## Installation
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd CarAI
+   ```
 
-### Android
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-```sh
-# Using npm
-npm run android
+3. **iOS Setup** (macOS only)
+   ```bash
+   cd ios
+   pod install
+   cd ..
+   ```
 
-# OR using Yarn
-yarn android
-```
+## Firebase Configuration
+
+1. **Create a Firebase Project**
+   - Go to [Firebase Console](https://console.firebase.google.com/)
+   - Create a new project
+   - Enable Authentication with Email/Password provider
+
+2. **Configure Firebase in your app**
+   - Update the Firebase configuration in `lib/firebase.js`
+   - Replace the placeholder values with your actual Firebase config:
+
+   ```javascript
+   const firebaseConfig = {
+     apiKey: "your-api-key",
+     authDomain: "your-project-id.firebaseapp.com",
+     projectId: "your-project-id",
+     storageBucket: "your-project-id.appspot.com",
+     messagingSenderId: "your-messaging-sender-id",
+     appId: "your-app-id"
+   };
+   ```
+
+3. **iOS Configuration**
+   - Download `GoogleService-Info.plist` from Firebase Console
+   - Add it to your iOS project in Xcode
+   - Place it in the `ios/CarAI/` directory
+
+4. **Android Configuration**
+   - Download `google-services.json` from Firebase Console
+   - Place it in the `android/app/` directory
+
+## Running the App
 
 ### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+```bash
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Android
+```bash
+npm run android
+```
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+### Metro Bundler
+```bash
+npm start
+```
 
-## Step 3: Modify your app
+## Project Structure
 
-Now that you have successfully run the app, let's make changes!
+```
+CarAI/
+├── src/
+│   ├── context/
+│   │   └── AuthContext.tsx          # Authentication context
+│   ├── navigation/
+│   │   └── AppNavigator.tsx         # Navigation setup
+│   └── screens/
+│       ├── auth/
+│       │   ├── LoginScreen.tsx      # Login screen
+│       │   ├── SignUpScreen.tsx     # Sign up screen
+│       │   └── ForgotPasswordScreen.tsx # Password reset screen
+│       └── HomeScreen.tsx           # Main app screen
+├── lib/
+│   └── firebase.js                  # Firebase configuration
+├── App.tsx                          # Main app component
+└── package.json
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## Authentication Flow
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+1. **App Launch**: The app checks for existing user authentication
+2. **Login Screen**: Users can sign in with email/password
+3. **Sign Up Screen**: New users can create accounts
+4. **Forgot Password**: Users can reset their passwords
+5. **Home Screen**: Authenticated users see the main app interface
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## Key Components
 
-## Congratulations! :tada:
+### AuthContext
+Manages authentication state throughout the app using React Context.
 
-You've successfully run and modified your React Native App. :partying_face:
+### Firebase Integration
+- `signUp()`: Create new user accounts
+- `signIn()`: Authenticate existing users
+- `signOut()`: Sign out users
+- `resetPassword()`: Send password reset emails
+- `onAuthStateChanged()`: Listen for authentication state changes
 
-### Now what?
+### Navigation
+Uses React Navigation with stack navigation for smooth transitions between screens.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## Styling
 
-# Troubleshooting
+The app uses a modern, clean design with:
+- Consistent color scheme (#3498db, #2c3e50, #7f8c8d)
+- Rounded corners and shadows
+- Responsive layouts
+- Loading states and animations
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+## Error Handling
 
-# Learn More
+- Form validation for all inputs
+- Firebase error messages
+- Network error handling
+- User-friendly error alerts
 
-To learn more about React Native, take a look at the following resources:
+## Security Features
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- Secure password requirements
+- Email validation
+- Firebase security rules
+- AsyncStorage for local data persistence
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For support, please open an issue in the GitHub repository or contact the development team.
+
+---
+
+**Note**: Make sure to configure your Firebase project properly and add the necessary configuration files before running the app.
+# CarAi
